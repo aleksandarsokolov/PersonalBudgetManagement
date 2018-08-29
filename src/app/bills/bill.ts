@@ -2,7 +2,7 @@ export interface IBill {
     billId: number;
     date: string;
     memo: string;
-    location: string;
+    company: string;
     city: string;
     country: string;
     totalPrice: number;

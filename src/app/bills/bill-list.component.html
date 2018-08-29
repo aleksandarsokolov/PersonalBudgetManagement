@@ -1,0 +1,33 @@
+<div class='card'>
+    <div class='card-header'>
+        {{ pageTitle }}
+    </div>
+    <div class='card-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='bills && bills.length'>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Memo</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Type</th>
+                        <th>Products Count</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let bill of bills'>
+                        <td>bill.date</td>
+                        <td><a [routerLink]="['/bills', bills.billId]">{{ bill.memo }}</a></td>
+                        <td>{{ bill.company }}</td>
+                        <td>{{ bill.city }}, {{ bill.country }}</td>
+                        <td>bill type</td>
+                        <td>bill products count</td>
+                        <td>bill total price</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

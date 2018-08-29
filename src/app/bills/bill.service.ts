@@ -2,40 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { IProduct } from './product';
+import { IBill } from './bill';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProductService {
-  private productUrl = 'api/products/products.json'
+export class BillService {
+  private billsUrl = 'api/products/bills.json'
 
   constructor(private http: HttpClient) { }
-    
-  getProductsByID(id: number): Observable<IProduct[]> {
-      return this.http.get<IProduct[]>(this.productUrl).pipe(
-          tap(data => console.log('All: ' + JSON.stringify(data))),
-          catchError(this.handleError)
-      );
-  }
 
-
-  getProductsByBillID(id: number): Observable<IProduct[]> {
-    console.log('BillID: ' + id);
-    return this.http.get<IProduct[]>(this.productUrl).pipe(
-        map((data:any) => {
-            const results: IProduct[] = [];
-            data.map(item => {
-                if(item.billId == id){
-                    results.push(item);
-                }
-            });
-            return results;
-        }),
+  getBills(): Observable<IBill[]> {
+    return this.http.get<IBill[]>(this.billsUrl).pipe(
+        tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
-    )
+    );
   }
-
 
   private handleError(err: HttpErrorResponse){
       // in a real world app, we may send the server to some remote logging infrastructure
