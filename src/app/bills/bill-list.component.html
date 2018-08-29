@@ -18,8 +18,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let bill of bills'>
-                        <td>bill.date</td>
-                        <td><a [routerLink]="['/bills', bills.billId]">{{ bill.memo }}</a></td>
+                        <td>{{ bill.date | date:'MM/dd/yyyy'}}</td>
+                        <td><a [routerLink]="['/bills', bill.billId]">{{ bill.memo }}</a></td>
                         <td>{{ bill.company }}</td>
                         <td>{{ bill.city }}, {{ bill.country }}</td>
                         <td>bill type</td>

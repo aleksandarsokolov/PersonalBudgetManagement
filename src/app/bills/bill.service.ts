@@ -9,7 +9,8 @@ import { IBill } from './bill';
   providedIn: 'root'
 })
 export class BillService {
-  private billsUrl = 'api/products/bills.json'
+  private billsUrl = '/api/products/bills.json'
+  //\api\products\bills.json
 
   constructor(private http: HttpClient) { }
 

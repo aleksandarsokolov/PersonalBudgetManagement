@@ -19,7 +19,7 @@ export class ProductListComponent implements OnInit {
 
 
   onBack(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['/bills']);
   }
 
   ngOnInit() {

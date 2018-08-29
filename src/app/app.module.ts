@@ -20,8 +20,9 @@ import { ProductModule } from './products/product.module';
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     ]),
-    BillModule,
-    ProductModule
+    
+    ProductModule,
+    BillModule
   ],
   providers: [],
   bootstrap: [AppComponent]
