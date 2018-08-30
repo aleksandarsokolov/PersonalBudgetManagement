@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBill } from './bill';
-import { BillService } from './bill.service';
+import { BillService } from '../data/bill.service';
+// import { BillService } from './bill.service';
 
 @Component({
   selector: 'app-bill-list',
