@@ -4,7 +4,7 @@
     </div>
     <div class='card-body'>
         <div class='table-responsive'>
-            <table class='table' *ngIf='bills && bills.length'>
+            <table class='table bill-table' *ngIf='bills && bills.length'>
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let bill of bills'>
+                    <tr *ngFor='let bill of bills' [routerLink]="['/bills', bill.billId]">
                         <td>{{ bill.date | date:'MM/dd/yyyy'}}</td>
                         <td><a [routerLink]="['/bills', bill.billId]">{{ bill.memo }}</a></td>
                         <td>{{ bill.company }}</td>

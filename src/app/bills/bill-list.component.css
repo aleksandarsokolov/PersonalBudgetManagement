@@ -1,0 +1,7 @@
+.bill-table > tbody > tr {
+    cursor: pointer;
+}
+
+.bill-table > tbody > tr:hover {
+    background-color: antiquewhite;
+}
