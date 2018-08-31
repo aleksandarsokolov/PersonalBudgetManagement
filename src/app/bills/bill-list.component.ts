@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBill } from './bill';
 import { BillService } from '../data/bill.service';
+import { Totals } from '../shared/totals';
 // import { BillService } from './bill.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { BillService } from '../data/bill.service';
 export class BillListComponent implements OnInit {
   pageTitle: string = 'Bills List';
   bills: IBill[] = [];
+  totals: Totals[] = [];
   errorMessage: string;
 
   constructor(private route: ActivatedRoute,
@@ -25,6 +27,11 @@ export class BillListComponent implements OnInit {
       },
       error => this.errorMessage = <any>error
     );
+  }
+
+  GetColor(verified: boolean): string{
+    if(verified==true) return 'green' 
+    else return 'red';
   }
 
 }

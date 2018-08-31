@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BillListComponent } from './bill-list.component';
 import { DataModule } from '../data/data.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
@@ -10,7 +11,8 @@ import { DataModule } from '../data/data.module';
     DataModule,
     RouterModule.forChild([
       { path: 'bills', component: BillListComponent }
-    ])
+    ]),
+    SharedModule
   ],
   declarations: [
     BillListComponent

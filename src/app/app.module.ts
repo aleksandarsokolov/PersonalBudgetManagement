@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from "@angular/common";
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -14,6 +15,7 @@ import { ProductModule } from './products/product.module';
     WelcomeComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot([

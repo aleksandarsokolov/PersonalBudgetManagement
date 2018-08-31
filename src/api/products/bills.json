@@ -11,7 +11,7 @@
         "userId": "",
         "lat": "",
         "long": "",
-        "verified": true,
+        "verified": false,
         "products": []
     },
     {
@@ -41,7 +41,7 @@
         "userId": "",
         "lat": "",
         "long": "",
-        "verified": true,
+        "verified": false,
         "products": []
     },
     {

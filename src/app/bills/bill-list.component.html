@@ -7,6 +7,7 @@
             <table class='table bill-table' *ngIf='bills && bills.length'>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Date</th>
                         <th>Memo</th>
                         <th>Company</th>
@@ -18,11 +19,14 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let bill of bills' [routerLink]="['/bills', bill.billId]">
+                        <td>
+                            <i class="fa fa-shopping-cart"
+                            [style.color]='GetColor(bill.verified)' aria-hidden="true"></i></td>
                         <td>{{ bill.date | date:'MM/dd/yyyy'}}</td>
-                        <td><a [routerLink]="['/bills', bill.billId]">{{ bill.memo }}</a></td>
+                        <td>{{ bill.memo }}</td>
                         <td>{{ bill.company }}</td>
                         <td>{{ bill.city }}, {{ bill.country }}</td>
-                        <td>bill type</td>
+                        <td><pm-icons [types]='bill.city'></pm-icons></td>
                         <td>bill products count</td>
                         <td>bill total price</td>
                     </tr>
