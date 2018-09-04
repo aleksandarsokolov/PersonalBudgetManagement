@@ -1,0 +1,56 @@
+ProductType:
+id: number
+name: string
+
+{ "id":"1", "name":"Beauty" }, 
+{ "id":"2", "name":"Clothes" }, 
+{ "id":"3", "name":"Deposit" }, 
+{ "id":"4", "name":"Electronics" }, 
+{ "id":"5", "name":"Education" }, 
+{ "id":"6", "name":"Food" }, 
+{ "id":"7", "name":"Gift" }, 
+{ "id":"8", "name":"Going Out" }, 
+{ "id":"9", "name":"Health" }, 
+{ "id":"10", "name":"Higiene" }, 
+{ "id":"11", "name":"Household" }, 
+{ "id":"12", "name":"Housing" }, 
+{ "id":"13", "name":"Lending" }, 
+{ "id":"14", "name":"Other" }, 
+{ "id":"15", "name":"Ticket" }, 
+{ "id":"16", "name":"Tax" },
+{ "id":"17", "name":"Travel" }, 
+{ "id":"18", "name":"Utilities" } 
+
+
+
+Bill:
+
+billId: number
+date: date
+memo: string 
+location: string
+city: string
+country: string
+totalPrice: money
+planned: bool
+utcTimeStamp: date
+userId: number
+lat: number
+long: number
+verified: bool
+
+
+Product:
+productId: number
+billId: number
+name: string
+brand: string
+amount: string
+price: money
+currency: string
+type: [productType] number
+
+
+
+
+
