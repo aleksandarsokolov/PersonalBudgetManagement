@@ -1,7 +1,36 @@
-.bill-table > tbody > tr {
+/* .bill-table > tbody > tr {
     cursor: pointer;
 }
 
 .bill-table > tbody > tr:hover {
     background-color: antiquewhite;
 }
+
+.bill-table .isVerified {
+    display: none;
+} */
+
+table {
+    width: 100%;
+  }
+  
+th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+tr.mat-footer-row {
+    font-weight: bold;
+  }
+
+  .example-icon {
+    padding: 0 14px;
+  }
+  
+.example-spacer {
+    flex: 1 1 auto;
+  }

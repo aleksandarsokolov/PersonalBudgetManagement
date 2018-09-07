@@ -16,7 +16,6 @@ export class BillService {
 
   getBills(): Observable<IBill[]> {
     return this.http.get<IBill[]>(this.billsUrl).pipe(
-        tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
     );
   }

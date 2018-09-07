@@ -1,37 +1,91 @@
-<div class='card'>
-    <div class='card-header'>
-        {{ pageTitle }}
-    </div>
-    <div class='card-body'>
-        <div class='table-responsive'>
-            <table class='table bill-table' *ngIf='bills && bills.length'>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Date</th>
-                        <th>Memo</th>
-                        <th>Company</th>
-                        <th>Location</th>
-                        <th>Type</th>
-                        <th>Products Count</th>
-                        <th>Total Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor='let bill of bills' [routerLink]="['/bills', bill.billId]">
-                        <td>
-                            <i class="fa fa-shopping-cart"
-                            [style.color]='GetColor(bill.verified)' aria-hidden="true"></i></td>
-                        <td>{{ bill.date | date:'MM/dd/yyyy'}}</td>
-                        <td>{{ bill.memo }}</td>
-                        <td>{{ bill.company }}</td>
-                        <td>{{ bill.city }}, {{ bill.country }}</td>
-                        <td><pm-icons [types]='bill.city'></pm-icons></td>
-                        <td>bill products count</td>
-                        <td>bill total price</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+<form #form="ngForm" >  
+    <mat-toolbar color="primary">      
+        <mat-toolbar-row>
+            <span><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;Bills</span>
+            <span class="example-spacer"></span>
+            
+            <mat-slide-toggle (click)="showVerifyCheckboxes()">Verify</mat-slide-toggle>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+
+    <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+
+     
+
+            <!-- <div class='table-responsive'>              -->
+                <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                    <!-- Verify Column -->
+                    <ng-container matColumnDef="verify-chk">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let bill">
+                             <mat-checkbox [attr.id]='bill.billid'></mat-checkbox>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                    <!-- Verified Icon Column -->
+                    <ng-container matColumnDef="verified" >
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header><i class="fa fa-shopping-cart" aria-hidden="true"></i></th>
+                        <td mat-cell *matCellDef="let bill">
+                            <i class="fa fa-shopping-cart" [style.color]='GetColor(bill.verified)' aria-hidden="true"></i>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef>  </td>
+                    </ng-container>
+                    
+                    <!-- Date Column -->
+                    <ng-container matColumnDef="date">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                        <td mat-cell *matCellDef="let bill"> {{ bill.date | date:'MM/dd/yyyy'}} </td>
+                        <td mat-footer-cell *matFooterCellDef>  </td>
+                    </ng-container>
+                    
+                    <!-- Memo Column -->
+                    <ng-container matColumnDef="memo">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Memo </th>
+                        <td mat-cell *matCellDef="let bill"> {{bill.memo}} </td>
+                        <td mat-footer-cell *matFooterCellDef>  </td>
+                    </ng-container>
+                    
+                    <!-- Location Column -->
+                    <ng-container matColumnDef="location">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+                        <td mat-cell *matCellDef="let bill"> {{ bill.city }}, {{ bill.country }} </td>
+                        <td mat-footer-cell *matFooterCellDef>  </td>
+                    </ng-container>
+                    
+                    <!-- Type Column -->
+                    <ng-container matColumnDef="type">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                        <td mat-cell *matCellDef="let bill"><pm-icons [types]='bill.city'></pm-icons></td>
+                        <td mat-footer-cell *matFooterCellDef> Total: </td>
+                    </ng-container>
+                    
+                    <!-- Count Column -->
+                    <ng-container matColumnDef="totalProducts">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Count </th>
+                        <td mat-cell *matCellDef="let bill">{{ bill.totalProducts }}</td>
+                        <td mat-footer-cell *matFooterCellDef> {{ getTotalCount() }} </td>
+                    </ng-container>
+                    
+                    <!-- Amount Column -->
+                    <ng-container matColumnDef="totalPrice">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                        <td mat-cell *matCellDef="let bill">{{ bill.totalPrice | currency:bill.currency:'symbol':'1.2-2' }}</td>
+                        <td mat-footer-cell *matFooterCellDef>
+                            <app-show-totals [totals]="getTotalCost()"></app-show-totals>
+                        </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
+                    <tr mat-row *matRowDef="let row; columns: getDisplayedColumns();"></tr>
+                    <tr mat-footer-row *matFooterRowDef="getDisplayedColumns()"></tr>
+                </table>
+            <!-- </div> -->
+</form>
+
+Model: {{ model | json }}
+<br>
+Angular: {{ form.value | json }}

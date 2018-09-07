@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ConvertToIconComponent } from './convert-to-icon.component';
+import { ShowTotalsComponent } from './show-totals.component';
+
 
 @NgModule({
   imports: [
@@ -9,10 +11,12 @@ import { ConvertToIconComponent } from './convert-to-icon.component';
     FormsModule    
   ],
   declarations: [
-    ConvertToIconComponent
+    ConvertToIconComponent,
+    ShowTotalsComponent
   ],
   exports: [
-    ConvertToIconComponent
+    ConvertToIconComponent,
+    ShowTotalsComponent
   ]
 })
 export class SharedModule { }
