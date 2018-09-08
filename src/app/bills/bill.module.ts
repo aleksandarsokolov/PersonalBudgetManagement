@@ -6,7 +6,18 @@ import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatFormFieldModule, MatSlideToggleModule, MatToolbarModule, MatIconModule, MatTableModule, MatSortModule, MatCheckboxModule } from '@angular/material';
+import { MatTooltipModule,
+  MatDividerModule,
+  MatDatepickerModule, MatNativeDateModule,
+  MatButtonModule, 
+  MatInputModule, 
+  MatFormFieldModule, 
+  MatSlideToggleModule, 
+  MatToolbarModule, 
+  MatTableModule, 
+  MatSortModule, 
+  MatCheckboxModule } from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -17,7 +28,18 @@ import { MatInputModule, MatFormFieldModule, MatSlideToggleModule, MatToolbarMod
       { path: 'bills', component: BillListComponent }
     ]),
     SharedModule, BrowserAnimationsModule,
-    MatInputModule, MatFormFieldModule, MatSlideToggleModule, MatToolbarModule, MatIconModule, MatTableModule, MatSortModule, MatCheckboxModule
+    MatTooltipModule,
+    MatDividerModule,
+    MatDatepickerModule, MatNativeDateModule, 
+    MatButtonModule, 
+    MatInputModule, 
+    MatFormFieldModule, 
+    MatSlideToggleModule, 
+    MatToolbarModule, 
+    MatIconModule, 
+    MatTableModule, 
+    MatSortModule, 
+    MatCheckboxModule
   ],
   declarations: [
     BillListComponent

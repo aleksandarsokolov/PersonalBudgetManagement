@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IBill, Bill } from './bill';
 import { BillService } from '../data/bill.service';
 import { Totals } from '../shared/totals';
+import {SelectionModel} from '@angular/cdk/collections';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import * as $ from 'jquery';
 // import { BillService } from './bill.service';
@@ -22,7 +23,8 @@ export class BillListComponent implements OnInit {
 
   //MatTable info
   dataSource;
-  displayColumns = [ 'verified', 'date', 'memo', 'location', 'type', 'totalProducts', 'totalPrice'];
+  selection;
+  displayColumns = [ 'verified', 'date', 'memo', 'location', 'type', 'totalProducts', 'totalPrice', 'openBill'];
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute,
@@ -33,9 +35,12 @@ export class BillListComponent implements OnInit {
     this.billService.getBills().subscribe(
       bills => {
         this.bills = bills;
-        this.dataSource = new MatTableDataSource(bills);
+        //this.dataSource = new MatTableDataSource(bills);
+        this.dataSource = new MatTableDataSource<IBill>(bills);
+        this.selection = new SelectionModel<IBill>(true, bills.filter(bill => bill.verified === true));
         this.dataSource.sort = this.sort;
         this.calculateTotalCost();
+        console.log();
       },
       error => this.errorMessage = <any>error
     );
@@ -99,5 +104,21 @@ export class BillListComponent implements OnInit {
       }
     } 
     return this.displayColumns;
+  }
+
+
+  
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }

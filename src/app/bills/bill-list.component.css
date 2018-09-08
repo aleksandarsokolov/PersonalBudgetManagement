@@ -1,14 +1,32 @@
-/* .bill-table > tbody > tr {
-    cursor: pointer;
-}
+/* Ripple effect START */
+.ripple {
+    background-position: center;
+    transition: background 0.8s;
+  }
+  .ripple:hover {
+    background: #ffffffd5 radial-gradient(circle, transparent 1%, #ffffffd5 1%) center/15000%;
+  }
+  .ripple:active {
+    background-color: #ff408052;
+    background-size: 100%;
+    transition: background 0s;
+  }
 
-.bill-table > tbody > tr:hover {
-    background-color: antiquewhite;
-}
+  .example-form {
+    min-width: 150px;
+    max-width: 300px;
+  }
+  .example-datepicker-form {
+    min-width: 100px;
+    max-width: 150px;
+  }
 
-.bill-table .isVerified {
-    display: none;
-} */
+  .add_new_bill {
+    position:fixed;
+    bottom: 3em;
+    right:3em;
+  }
+/* Ripple effect END */
 
 table {
     width: 100%;

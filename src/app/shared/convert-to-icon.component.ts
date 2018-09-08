@@ -12,7 +12,7 @@ export class ConvertToIconComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.icons = ["fa-home","fa-money"];
+    this.icons = ["home","attach_money"];
   }
 
 }
