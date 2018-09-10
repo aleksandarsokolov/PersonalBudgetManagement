@@ -16,5 +16,8 @@
 { "id":15, "name":"Ticket" }, 
 { "id":16, "name":"Tax" },
 { "id":17, "name":"Travel" }, 
-{ "id":18, "name":"Utilities" } 
+{ "id":18, "name":"Utilities" },
+{ "id":19, "name":"Car" },
+{ "id":20, "name":"Gas" },
+{ "id":21, "name":"Repair Service" }
 ]

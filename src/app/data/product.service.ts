@@ -8,7 +8,8 @@ import { IProduct } from '../products/product';
   providedIn: 'root'
 })
 export class ProductService {
-  private productUrl = 'api/products/products.json'
+  private productUrl = 'api/products/products.json';
+  private productTypeUrl = 'api/products/productTypes.json';
 
   constructor(private http: HttpClient) { }
     

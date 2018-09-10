@@ -4,9 +4,12 @@ import { RouterModule } from '@angular/router';
 import { BillListComponent } from './bill-list.component';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTooltipModule,
+import { 
+  MatAutocompleteModule,
+  MatExpansionModule,
+  MatTooltipModule,
   MatDividerModule,
   MatDatepickerModule, MatNativeDateModule,
   MatButtonModule, 
@@ -22,12 +25,14 @@ import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule, ReactiveFormsModule,
     DataModule,
     RouterModule.forChild([
       { path: 'bills', component: BillListComponent }
     ]),
     SharedModule, BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatExpansionModule,
     MatTooltipModule,
     MatDividerModule,
     MatDatepickerModule, MatNativeDateModule, 

@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IBill, Bill } from './bill';
 import { BillService } from '../data/bill.service';
 import { Totals } from '../shared/totals';
-import {SelectionModel} from '@angular/cdk/collections';
+import { SelectionModel } from '@angular/cdk/collections';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import * as $ from 'jquery';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 // import { BillService } from './bill.service';
 
 @Component({
@@ -16,28 +19,41 @@ import * as $ from 'jquery';
 export class BillListComponent implements OnInit {
   pageTitle: string = 'Bills List';
   showVerify: boolean = false;
+  showAddNew: boolean = true;
   errorMessage: string;
   bills: IBill[] = [];
   totals: Totals[] = [];
   model = new Bill();
 
+  // auto complete option
+  billFormGroup: FormGroup;
+
+  optionsCompanies: string[] = [];
+  filteredCompanies: Observable<string[]>;
+
   //MatTable info
   dataSource;
   selection;
-  displayColumns = [ 'verified', 'date', 'memo', 'location', 'type', 'totalProducts', 'totalPrice', 'openBill'];
+  displayColumns = [ 'verified', 'date', 'memo', 'company', 'location', 'type', 'totalProducts', 'totalPrice', 'openBill'];
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private billService: BillService) { }
+    private billService: BillService,
+    private _formBuilder: FormBuilder) {
+
+    this.billFormGroup = this._formBuilder.group({
+      company: new FormControl()
+    });
+  }
 
   ngOnInit() {
     this.billService.getBills().subscribe(
       bills => {
         this.bills = bills;
-        //this.dataSource = new MatTableDataSource(bills);
         this.dataSource = new MatTableDataSource<IBill>(bills);
         this.selection = new SelectionModel<IBill>(true, bills.filter(bill => bill.verified === true));
+        this.optionsCompanies = bills.map(bill => bill.company);
         this.dataSource.sort = this.sort;
         this.calculateTotalCost();
         console.log();
@@ -46,10 +62,22 @@ export class BillListComponent implements OnInit {
     );
 
 
+    this.filteredCompanies = this.billFormGroup.controls.company.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
     $(document).ready(function(){
-      // var div = $(".isVerified");  
-      // div.hide( "slow");
+      // Document ready jquery script
     });
+  }
+
+  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.optionsCompanies.filter(option => option.toLowerCase().includes(filterValue));
   }
       
   showVerifyCheckboxes(){

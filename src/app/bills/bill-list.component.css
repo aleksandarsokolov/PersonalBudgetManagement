@@ -19,6 +19,10 @@
   .example-datepicker-form {
     min-width: 100px;
     max-width: 150px;
+    margin-right:10px;
+  }
+  .example-form-field {
+    margin-right:10px;
   }
 
   .add_new_bill {
