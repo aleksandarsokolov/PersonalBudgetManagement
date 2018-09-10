@@ -54,3 +54,19 @@ type: [productType] number
 
 
 
+<tfoot>
+    <tr>
+        <td *ngIf='showVerify'>
+            <!-- <input type="checkbox" name="verified" [(ngModel)]="model.verified"/> -->
+            <mat-checkbox name="verified" [(ngModel)]="model.verified"></mat-checkbox>
+        </td>
+        <td></td>
+        <td><input class="form-control" type="date" required placeholder="Date" name="date" [(ngModel)]="model.date"></td>
+        <td><input class="form-control" type="text" required placeholder="Memo" name="memo" [(ngModel)]="model.memo"></td>
+        <td><input class="form-control" type="text" required placeholder="Company" name="company" [(ngModel)]="model.company"></td>
+        <td><input class="form-control" type="text" required placeholder="Location" name="location" [(ngModel)]="model.location"></td>
+        <td></td>
+        <td><button class="btn btn-primary" type="submit">Ok</button></td>
+        <td></td>
+    </tr>
+</tfoot>
