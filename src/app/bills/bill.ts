@@ -1,6 +1,6 @@
 export interface IBill {
     billId: number;
-    date: string;
+    date: Date;
     memo: string;
     company: string;
     location: string;
@@ -20,7 +20,7 @@ export interface IBill {
 export class Bill {
 
     public billId: number;
-    public date: string;
+    public date: Date;
     public memo: string;
     public company: string;
     public location: string;
@@ -54,6 +54,6 @@ export class Bill {
 
     constructor() {
         this.verified = false;
-        
+        this.date = new Date();
     }
 }

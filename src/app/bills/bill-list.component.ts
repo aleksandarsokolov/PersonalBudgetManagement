@@ -61,7 +61,7 @@ export class BillListComponent implements OnInit {
       error => this.errorMessage = <any>error
     );
 
-
+    //Companies Autocomplete
     this.filteredCompanies = this.billFormGroup.controls.company.valueChanges
       .pipe(
         startWith(''),
@@ -73,7 +73,7 @@ export class BillListComponent implements OnInit {
     });
   }
 
-  
+  //Companies Autocomplete
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -91,30 +91,30 @@ export class BillListComponent implements OnInit {
   
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.calculateTotalCost();
+    //console.log("Filtered List: " + JSON.stringify(this.dataSource);
   }
   
   
   calculateTotalCost() {
     var me = this;
     me.totals = new Array<Totals>();
-    me.bills.forEach(function (elem) {
-      let index = -1;
-      if(me.totals.length != 0)
-      {
-        index = me.totals.findIndex(e => e.currency === elem.currency);
-      }
-      
-      if(index != -1) {
-        me.totals[index].amount = me.totals[index].amount + elem.totalPrice;    
-      } else {
-        me.totals.push({currency: elem.currency, amount: elem.totalPrice});
-      }
-    });
-  }
+    if(me.dataSource !=undefined) {
+      me.dataSource.filteredData.forEach(function (elem) {
+        let index = -1;
+        if(me.totals.length != 0)
+        {
+          index = me.totals.findIndex(e => e.currency === elem.currency);
+        }
+        
+        if(index != -1) {
+          me.totals[index].amount = me.totals[index].amount + elem.totalPrice;    
+        } else {
+          me.totals.push({currency: elem.currency, amount: elem.totalPrice});
+        }
+      });
 
-  getTotalCost() {
-    // console.log("Totals on function call " + JSON.stringify(this.totals));
-    return this.totals;
+    }
   }
   
   getTotalCount() {
