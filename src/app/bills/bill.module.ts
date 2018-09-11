@@ -5,6 +5,7 @@ import { BillListComponent } from './bill-list.component';
 import { DataModule } from '../data/data.module';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { 
   MatAutocompleteModule,
@@ -19,7 +20,8 @@ import {
   MatToolbarModule, 
   MatTableModule, 
   MatSortModule, 
-  MatCheckboxModule } from '@angular/material';
+  MatCheckboxModule, 
+  MatCardModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
@@ -31,6 +33,7 @@ import {MatIconModule} from '@angular/material/icon';
       { path: 'bills', component: BillListComponent }
     ]),
     SharedModule, BrowserAnimationsModule,
+    MatCardModule,
     MatAutocompleteModule,
     MatExpansionModule,
     MatTooltipModule,
@@ -44,7 +47,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule, 
     MatTableModule, 
     MatSortModule, 
-    MatCheckboxModule
+    MatCheckboxModule,
+    FlexLayoutModule
   ],
   declarations: [
     BillListComponent

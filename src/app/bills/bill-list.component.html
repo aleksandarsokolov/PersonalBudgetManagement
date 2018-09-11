@@ -10,17 +10,17 @@
     
 
         <!-- Add new bill -->
-        <mat-toolbar [style.visibility]="showAddNew ? 'visible' : 'hidden'">
+        <mat-toolbar fxFlexFill fxLayout="row wrap" [style.visibility]="showAddNew ? 'visible' : 'hidden'">
 
                 <!-- Date -->
-                <mat-form-field class="example-datepicker-form">
+                <mat-form-field fxLayout="column" fxFlex="50" class="example-datepicker-form">
                         <input matInput [matDatepicker]="pickerDate" placeholder="Date" [(ngModel)]="model.date" name="date">
                         <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #pickerDate></mat-datepicker>
                 </mat-form-field>
                 
                 <!-- Memo -->
-                <mat-form-field class="example-form-field">
+                <mat-form-field fxLayout="column" class="example-form-field">
                     <input matInput type="text" placeholder="Memo" [(ngModel)]="model.memo" name="memo">
                     <button mat-button *ngIf="model.memo" matSuffix mat-icon-button aria-label="Clear" (click)="model.memo=''">
                         <mat-icon>close</mat-icon>
@@ -28,23 +28,26 @@
                 </mat-form-field>
     
                 <!-- Company -->
-                <div [formGroup]="billFormGroup" class="example-form-field">
-                    <mat-form-field >
-                        <input type="text" placeholder="Company" formControlName="company" [(ngModel)]="model.company" 
-                        aria-label="Company" matInput  [matAutocomplete]="auto"  >
-                        <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let comp of filteredCompanies | async" [value]="comp">
-                            {{ comp }}
-                        </mat-option>
-                        </mat-autocomplete>
-                        <button mat-button *ngIf="model.company" matSuffix mat-icon-button aria-label="Clear" (click)="model.company=''">
-                            <mat-icon>close</mat-icon>
-                        </button>
-                    </mat-form-field>
+                <div fxLayout="column" fxFlexFill>
+                    
+                    <div [formGroup]="billFormGroup" class="example-form-field">
+                        <mat-form-field >
+                            <input type="text" placeholder="Company" formControlName="company" [(ngModel)]="model.company" 
+                            aria-label="Company" matInput  [matAutocomplete]="auto"  >
+                            <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let comp of filteredCompanies | async" [value]="comp">
+                                {{ comp }}
+                            </mat-option>
+                            </mat-autocomplete>
+                            <button mat-button *ngIf="model.company" matSuffix mat-icon-button aria-label="Clear" (click)="model.company=''">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </div>
                 </div>
             
                 <!-- Location -->
-                <mat-form-field class="example-form-field">
+                <mat-form-field fxLayout="column" class="example-form-field">
                     <input matInput type="text" placeholder="Location" [(ngModel)]="model.location" name="location">
                     <button mat-button *ngIf="model.location" matSuffix mat-icon-button aria-label="Clear" (click)="model.location=''">
                         <mat-icon>close</mat-icon>
@@ -52,24 +55,26 @@
                 </mat-form-field>
     
                 <!-- Save Button -->
-                <button mat-raised-button color="primary">Add</button>
+                <div  fxLayout="column">
+                        <button mat-raised-button color="primary">Add</button>
+                </div>
             
             </mat-toolbar>
     
-    <mat-toolbar>
-        <mat-form-field class="example-datepicker-form">
+    <mat-toolbar  fxLayoutGap fxLayout="row wrap" >
+        <mat-form-field  fxLayout="column" fxFlex="30" class="example-datepicker-form">
             <input matInput [matDatepicker]="pickerStart" placeholder="Start date">
             <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
             <mat-datepicker touchUi #pickerStart></mat-datepicker>
         </mat-form-field>
-        <mat-divider [inset]="true"></mat-divider>
-        <mat-form-field class="example-datepicker-form">
+        <!-- <mat-divider [inset]="true"></mat-divider> -->
+        <mat-form-field  fxLayout="column" fxFlex="30" class="example-datepicker-form">
                 <input matInput [matDatepicker]="pickerEnd" placeholder="End date">
                 <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #pickerEnd></mat-datepicker>
         </mat-form-field>
-        <span class="example-spacer"></span>
-        <mat-form-field class="example-form">
+        <!-- <span class="example-spacer"></span> -->
+        <mat-form-field  fxLayout="column" fxFlex="30" class="example-form">
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
                 <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
@@ -79,8 +84,8 @@
 
      
 
-        <!-- <div class='table-responsive'>              -->
-            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <mat-card fxFlexFill fxLayout="row wrap" style="padding:0px;">              
+            <table mat-table fxFlexFill [dataSource]="dataSource" matSort class="mat-elevation-z8">
                 <!-- Verify Column -->
                 <ng-container matColumnDef="verify-chk">
                     <th mat-header-cell *matHeaderCellDef>
@@ -120,9 +125,9 @@
                 
                 <!-- Memo Column -->
                 <ng-container matColumnDef="memo">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Memo </th>
-                    <td mat-cell *matCellDef="let bill"> {{bill.memo}} </td>
-                    <td mat-footer-cell *matFooterCellDef>  </td>
+                    <th fxShow="true" fxHide.lt-md="true" mat-header-cell *matHeaderCellDef mat-sort-header> Memo </th>
+                    <td fxShow="true" fxHide.lt-md="true" mat-cell *matCellDef="let bill"> {{bill.memo}} </td>
+                    <td fxShow="true" fxHide.lt-md="true" mat-footer-cell *matFooterCellDef>  </td>
                 </ng-container>
                 
                 <!-- Company Column -->
@@ -141,18 +146,18 @@
                 
                 <!-- Type Column -->
                 <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                    <td mat-cell *matCellDef="let bill">
+                    <th fxShow="true" fxHide.lt-sm="true" mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                    <td fxShow="true" fxHide.lt-sm="true" mat-cell *matCellDef="let bill">
                         <pm-icons [types]='bill.city'></pm-icons>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef> Total: </td>
+                    <td fxShow="true" fxHide.lt-sm="true" mat-footer-cell *matFooterCellDef> Total: </td>
                 </ng-container>
                 
                 <!-- Count Column -->
                 <ng-container matColumnDef="totalProducts">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Count </th>
                     <td mat-cell *matCellDef="let bill">{{ bill.totalProducts }}</td>
-                    <td mat-footer-cell *matFooterCellDef> {{ getTotalCount() }} </td>
+                    <td mat-footer-cell *matFooterCellDef> {{ totalCount }} </td>
                 </ng-container>
                 
                 <!-- Amount Column -->
@@ -166,21 +171,21 @@
 
                 <!-- Open -->
                 <ng-container matColumnDef="openBill">
-                        <th mat-header-cell *matHeaderCellDef></th>
-                        <td mat-cell *matCellDef="let bill">
+                        <th fxShow="true" fxHide.lt-md="true" mat-header-cell *matHeaderCellDef></th>
+                        <td fxShow="true" fxHide.lt-md="true" mat-cell *matCellDef="let bill">
                             <a [routerLink]="['/bills', bill.billId]">
                                 <mat-icon aria-hidden="true">open_in_new</mat-icon>
                             </a>
                         </td>
-                        <td mat-footer-cell *matFooterCellDef></td>
+                        <td fxShow="true" fxHide.lt-md="true" mat-footer-cell *matFooterCellDef></td>
                     </ng-container>
                 
                 <tr mat-header-row *matHeaderRowDef="getDisplayedColumns()"></tr>
                 <tr mat-row class="ripple" *matRowDef="let row; columns: getDisplayedColumns();" 
-                    (click)="selection.toggle(row)" ></tr>
+                    (click)="selection.toggle(row)"></tr>
                 <tr mat-footer-row *matFooterRowDef="getDisplayedColumns()"></tr>
             </table>
-        <!-- </div> -->
+        </mat-card>
         <mat-toolbar class="mat-elevation-z8">
                 
             <div class="button-row">

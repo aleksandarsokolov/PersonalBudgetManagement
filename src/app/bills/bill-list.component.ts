@@ -9,6 +9,7 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 import * as $ from 'jquery';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 // import { BillService } from './bill.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class BillListComponent implements OnInit {
   errorMessage: string;
   bills: IBill[] = [];
   totals: Totals[] = [];
+  totalCount: number = 0;
   model = new Bill();
 
   // auto complete option
@@ -55,7 +57,8 @@ export class BillListComponent implements OnInit {
         this.selection = new SelectionModel<IBill>(true, bills.filter(bill => bill.verified === true));
         this.optionsCompanies = bills.map(bill => bill.company);
         this.dataSource.sort = this.sort;
-        this.calculateTotalCost();
+        this.getTotalCost();
+        this.getTotalCount();
         console.log();
       },
       error => this.errorMessage = <any>error
@@ -91,12 +94,13 @@ export class BillListComponent implements OnInit {
   
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.calculateTotalCost();
+    this.getTotalCost();
+    this.getTotalCount();
     //console.log("Filtered List: " + JSON.stringify(this.dataSource);
   }
   
   
-  calculateTotalCost() {
+  getTotalCost() {
     var me = this;
     me.totals = new Array<Totals>();
     if(me.dataSource !=undefined) {
@@ -118,7 +122,11 @@ export class BillListComponent implements OnInit {
   }
   
   getTotalCount() {
-    return this.bills.map(t => t.totalProducts).reduce((acc, value) => acc + value, 0);
+    if(this.dataSource.filteredData !=undefined) {
+      this.totalCount = this.dataSource.filteredData.map(t => t.totalProducts).reduce((acc, value) => acc + value, 0);
+    } else {
+      this.totalCount = this.bills.map(t => t.totalProducts).reduce((acc, value) => acc + value, 0);
+    }
   }
 
   getDisplayedColumns(): string[] {
