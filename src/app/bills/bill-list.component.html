@@ -13,14 +13,14 @@
         <mat-toolbar fxFlexFill fxLayout="row wrap" [style.visibility]="showAddNew ? 'visible' : 'hidden'">
 
                 <!-- Date -->
-                <mat-form-field fxLayout="column" fxFlex="50" class="example-datepicker-form">
+                <mat-form-field fxLayout="column" fxFlex.gt-xs="25" fxFlex.gt-sm="20" fxFlex.gt-md="10" fxFlex.gt-lg="10" fxFlex.gt-xl="10"  class="example-datepicker-form">
                         <input matInput [matDatepicker]="pickerDate" placeholder="Date" [(ngModel)]="model.date" name="date">
                         <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
                         <mat-datepicker touchUi #pickerDate></mat-datepicker>
                 </mat-form-field>
                 
                 <!-- Memo -->
-                <mat-form-field fxLayout="column" class="example-form-field">
+                <mat-form-field fxLayout="column" fxFlex.gt-xs="45" fxFlex.gt-sm="65" fxFlex.gt-md="30" fxFlex.gt-lg="30" fxFlex.gt-xl="30" class="example-form-field">
                     <input matInput type="text" placeholder="Memo" [(ngModel)]="model.memo" name="memo">
                     <button mat-button *ngIf="model.memo" matSuffix mat-icon-button aria-label="Clear" (click)="model.memo=''">
                         <mat-icon>close</mat-icon>
@@ -28,7 +28,7 @@
                 </mat-form-field>
     
                 <!-- Company -->
-                <div fxLayout="column" fxFlexFill>
+                <div fxLayout="column" fxFlexFill fxFlex.gt-xs="45" fxFlex.gt-sm="40" fxFlex.gt-md="20" fxFlex.gt-lg="20" fxFlex.gt-xl="20" >
                     
                     <div [formGroup]="billFormGroup" class="example-form-field">
                         <mat-form-field >
@@ -47,7 +47,7 @@
                 </div>
             
                 <!-- Location -->
-                <mat-form-field fxLayout="column" class="example-form-field">
+                <mat-form-field fxLayout="column" fxFlex.gt-xs="45" fxFlex.gt-sm="45" fxFlex.gt-md="25" fxFlex.gt-lg="25" fxFlex.gt-xl="20" class="example-form-field">
                     <input matInput type="text" placeholder="Location" [(ngModel)]="model.location" name="location">
                     <button mat-button *ngIf="model.location" matSuffix mat-icon-button aria-label="Clear" (click)="model.location=''">
                         <mat-icon>close</mat-icon>
@@ -55,7 +55,7 @@
                 </mat-form-field>
     
                 <!-- Save Button -->
-                <div  fxLayout="column">
+                <div  fxLayout="column" fxFlex.gt-xs="45" fxFlex.gt-sm="10" fxFlex.gt-md="10" fxFlex.gt-lg="10" fxFlex.gt-xl="10">
                         <button mat-raised-button color="primary">Add</button>
                 </div>
             
@@ -85,7 +85,7 @@
      
 
         <mat-card fxFlexFill fxLayout="row wrap" style="padding:0px;">              
-            <table mat-table fxFlexFill [dataSource]="dataSource" matSort class="mat-elevation-z8">
+            <table mat-table fxFlexFill [dataSource]="dataSource" matSort class="mat-elevation-z2">
                 <!-- Verify Column -->
                 <ng-container matColumnDef="verify-chk">
                     <th mat-header-cell *matHeaderCellDef>
