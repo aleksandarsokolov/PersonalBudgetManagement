@@ -12,6 +12,14 @@
     transition: background 0s;
   }
 
+  .open-products > td {
+    font-size: x-small !important;
+  }
+
+  .mat-column-totalProducts {
+    text-align: center;
+  }
+
   .example-form {
     /* min-width: 150px;
     max-width: 300px; */
