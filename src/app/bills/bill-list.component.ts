@@ -78,6 +78,7 @@ export class BillListComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => this._filter(value))
+
       );
 
     $(document).ready(function(){
