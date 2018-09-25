@@ -72,7 +72,7 @@ export class BillListComponent implements OnInit {
       );
 
     $(document).ready(function(){
-      // Document ready jquery script
+      //    Document ready jquery script
     });
   }
 
