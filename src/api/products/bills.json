@@ -1,7 +1,7 @@
 [
     {
         "billId": "1",
-        "date": "1535476378312",
+        "date": "08/28/2018",
         "memo": "Hrana na pocetok na mesec",
         "company": "Albertsons",
         "location": "Goleta, USA",
@@ -19,7 +19,7 @@
     },
     {
         "billId": "2",
-        "date": "1535476378312",
+        "date": "01/08/2016",
         "memo": "",
         "company": "Ross",
         "location": "Goleta, USA",
@@ -37,7 +37,7 @@
     },
     {
         "billId": "3",
-        "date": "1535476378312",
+        "date": "05/28/2017",
         "memo": "",
         "company": "Marshals",
         "location": "Santa Barbara, USA",
@@ -55,7 +55,7 @@
     },
     {
         "billId": "4",
-        "date": "1535476378312",
+        "date": "08/28/2018",
         "memo": "",
         "company": "Boba",
         "location": "Santa Barbara, USA",
@@ -73,7 +73,7 @@
     },
     {
         "billId": "5",
-        "date": "1535476378312",
+        "date": "08/28/2018",
         "memo": "",
         "company": "French Press",
         "location": "Santa Barbara, USA",
@@ -91,7 +91,7 @@
     },
     {
         "billId": "6",
-        "date": "1535476378312",
+        "date": "08/28/2018",
         "memo": "",
         "company": "Home Depot",
         "location": "Goleta, USA",
@@ -109,7 +109,7 @@
     },
     {
         "billId": "7",
-        "date": "1535476378312",
+        "date": "08/22/2018",
         "memo": "",
         "company": "PVS Pharmacy",
         "location": "Santa Barbara, USA",
@@ -127,7 +127,7 @@
     },
     {
         "billId": "8",
-        "date": "1535476378312",
+        "date": "08/28/2017",
         "memo": "",
         "company": "Costco",
         "location": "Goleta, USA",

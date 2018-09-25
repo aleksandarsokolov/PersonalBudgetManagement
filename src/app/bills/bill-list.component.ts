@@ -5,12 +5,14 @@ import { IBill, Bill } from './bill';
 import { BillService } from '../data/bill.service';
 import { Totals } from '../shared/totals';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { MatSort, MatTableDataSource, MatSnackBar, MatSnackBarRef } from '@angular/material';
 import * as $ from 'jquery';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 // import { BillService } from './bill.service';
+
+
 
 @Component({
   selector: 'app-bill-list',
@@ -35,14 +37,16 @@ export class BillListComponent implements OnInit {
 
   //MatTable info
   dataSource;
-  selection;
-  displayColumns = [ 'verified', 'date', 'memo', 'company', 'location', 'type', 'totalProducts', 'totalPrice', 'openBill'];
+  //selection;
+  selection = new SelectionModel<IBill>(true, []);
+  displayColumns = [ 'verified', 'date', 'memo', 'company', 'location', 'type', 'totalProducts', 'totalPrice', 'openBill', 'editBill'];
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private billService: BillService,
-    private _formBuilder: FormBuilder) {
+    private _formBuilder: FormBuilder,
+    public snackBar: MatSnackBar) {
 
     this.billFormGroup = this._formBuilder.group({
       company: new FormControl()
@@ -53,8 +57,13 @@ export class BillListComponent implements OnInit {
     this.billService.getBills().subscribe(
       bills => {
         this.bills = bills;
-        this.dataSource = new MatTableDataSource<IBill>(bills);
-        this.selection = new SelectionModel<IBill>(true, bills.filter(bill => bill.verified === true));
+        this.bills.forEach(function (bill) {
+          bill.date = new Date(bill.date);
+          return bill;   
+        });
+        
+        this.dataSource = new MatTableDataSource<IBill>(this.bills);
+        //this.selection = new SelectionModel<IBill>(true, bills.filter(bill => bill.verified === true));
         this.optionsCompanies = bills.map(bill => bill.company);
         this.dataSource.sort = this.sort;
         this.getTotalCost();
@@ -69,10 +78,14 @@ export class BillListComponent implements OnInit {
       .pipe(
         startWith(''),
         map(value => this._filter(value))
+
       );
 
     $(document).ready(function(){
-      //    Document ready jquery script
+      // Document ready jquery script
+      $(".open-products").click(function(this){
+        window.open("bills/" + this.id, "_self");
+      });
     });
   }
 
@@ -156,5 +169,32 @@ export class BillListComponent implements OnInit {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  editBill(id){
+    var bill = this.dataSource.data.filter(bill => bill.billId == id)[0];
+    this.model = bill;
+  }
+
+  openSnackBar(message: string, action: string) {
+    let snackBarRef = this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+    
+    snackBarRef.onAction().subscribe(() => {
+      this.model = new Bill();
+    });
+  }
+
+  saveModel() {
+    if (this.model.billId !=0 ){
+      var index = this.dataSource.data.findIndex(element => element.billId == this.model.billId);
+    }
+    else
+    {
+      this.bills.push(this.model);
+      this.dataSource = new MatTableDataSource<IBill>(this.bills);
+      this.model = new Bill();
+    }
   }
 }

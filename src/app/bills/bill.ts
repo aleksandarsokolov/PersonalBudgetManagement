@@ -53,6 +53,7 @@ export class Bill {
     // ) {}
 
     constructor() {
+        this.billId = 0;
         this.verified = false;
         this.date = new Date();
     }

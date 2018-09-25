@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { BillListComponent } from './bill-list.component';
@@ -23,6 +23,15 @@ import {
   MatCheckboxModule, 
   MatCardModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
+
+@Pipe({ name: 'myPipe'})
+export class MyPipe implements PipeTransform{
+  transform(val) {
+    return new Date(val);
+  } 
+}
 
 @NgModule({
   imports: [
@@ -48,10 +57,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatTableModule, 
     MatSortModule, 
     MatCheckboxModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSnackBarModule
   ],
   declarations: [
-    BillListComponent
+    BillListComponent, MyPipe
   ]
 })
 export class BillModule { }
